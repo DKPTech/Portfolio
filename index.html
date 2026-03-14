@@ -1,142 +1,494 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <style>
-  body{
-font-family: Arial;
-margin:0;
-background:#111;
-color:white;
+  /* --- CSS Variables & Reset --- */
+:root {
+    --bg-color: #0b1120;
+    --surface-color: #1e293b;
+    --primary-color: rgb(240, 128, 128);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --font-family: system-ui, -apple-system, sans-serif;
+    --transition: all 0.3s ease;
 }
 
-header{
-text-align:center;
-padding:40px;
-background:#1f1f1f;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
-nav a{
-margin:10px;
-color:#00ffcc;
-text-decoration:none;
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
 }
 
-section{
-padding:40px;
+/* --- Typography & Global Elements --- */
+h1, h2, h3 {
+    font-weight: 700;
 }
 
-.skills{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.card{
-background:#1e1e1e;
-padding:20px;
-border-radius:10px;
-width:200px;
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
 }
 
-.project{
-background:#1e1e1e;
-padding:20px;
-margin:10px 0;
-border-radius:10px;
+.section-title::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
 }
 
-a{
-color:#00ffcc;
+section {
+    padding: 6rem 10%;
 }
 
-footer{
-text-align:center;
-padding:20px;
-background:#1f1f1f;
+/* --- Navigation --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(11, 17, 32, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 10%;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero h1 span {
+    color: var(--primary-color);
+}
+
+.hero h2 {
+    font-size: 1.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+}
+
+/* --- Buttons --- */
+.btn {
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn.primary {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn.primary:hover {
+    background: transparent;
+    color: var(--primary-color);
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 2px solid var(--text-main);
+    margin-left: 1rem;
+}
+
+.btn.secondary:hover {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+/* --- About Section --- */
+.about-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+}
+
+/* --- Skills Section --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.skill-card {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 1px 20px rgb(240, 128, 128);
+}
+
+.skill-card h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.skill-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* --- Projects Section --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: var(--surface-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 1px 20px rgb(240, 128, 128);
+}
+
+.project-info {
+    padding: 2rem;
+}
+
+.project-info h3 {
+    margin-bottom: 1rem;
+}
+
+.project-info p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.tag {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+/* --- Contact Section --- */
+.contact {
+    text-align: center;
+}
+
+.contact p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* --- Scroll Animations --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    will-change: opacity, visibility;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        margin-top: 1rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+
+    .btn.secondary {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+    
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contact-links .btn {
+        margin: 0;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
 </style>
 <script>
-  console.log("Portfolio Loaded");
+  
+
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Smooth Scrolling for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    // 2. Scroll Reveal Animations using Intersection Observer
+    
+
+const observerOptions = {
+        root: null, // use the viewport
+        rootMargin: '0px',
+        threshold: 0.2 // Trigger when 10% of the element is visible
+    };
+
+const fadeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            // Add 'visible' class when element comes into view
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: Stop observing once revealed so it doesn't animate out
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    // Select all elements with the .fade-in class and observe them
+const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach(el => {
+        fadeObserver.observe(el);
+    });
+});
+  
+    // Select all elements with the .fade-in class and observe them
+    
+
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dheeraj Panda | Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dheeraj Kumar Panda | Portfolio</title>
+    
 </head>
-
 <body>
+    <nav class="navbar">
+        <div class="logo">DKP<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-<header>
-<h1>Dheeraj Kumar Panda</h1>
-<p>Python Developer | Web Developer | Video Editor</p>
+    <header id="home" class="hero fade-in">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Dheeraj Kumar Panda</span></h1>
+            <h2>Class 12 Student & Aspiring Developer</h2>
+            <p>Building functional web experiences and engaging video content from India.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary">View My Work</a>
+                <a href="#contact" class="btn secondary">Contact Me</a>
+            </div>
+        </div>
+    </header>
 
-<nav>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-</nav>
-</header>
+    <section id="about" class="about fade-in">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Hello! I am a Class 12 student based in India with a strong passion for technology and digital creation. I am currently learning the ropes of web and software development, focusing on building a solid foundation in HTML, CSS, and Python.</p>
+                <p>Beyond writing code, I have a deep interest in visual storytelling. I am continuously improving my video editing skills using CapCut, exploring ways to blend technical logic with creative multimedia.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="about">
-<h2>About Me</h2>
-<p>
-I am a Class 12 student passionate about technology and programming. 
-I work with Python, HTML and CSS to build projects and websites. 
-I also edit videos using CapCut and currently I am learning more about professional editing to manage and publish my projects.
-</p>
-</section>
+    <section id="skills" class="skills fade-in">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Python</h3>
+                <p>Scripting, basic algorithms, and core programming logic.</p>
+            </div>
+            <div class="skill-card">
+                <h3>HTML & CSS</h3>
+                <p>Responsive web design, Flexbox, Grid, and modern UI creation.</p>
+            </div>
+            <div class="skill-card">
+                <h3>Git & GitHub</h3>
+                <p>Version control, repository management, and code tracking.</p>
+            </div>
+            <div class="skill-card">
+                <h3>Video Editing</h3>
+                <p>Crafting visual content and animations using CapCut.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="skills">
-<h2>Skills</h2>
+    <section id="projects" class="projects fade-in">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Git and Github</h3>
+                    <p>Creating projects with html css and python for various taks , still continuing my work.</p>
+                    <span class="tag">productivity-tracker</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Developer Portfolio</h3>
+                    <p>A fully responsive personal portfolio website built from scratch using raw HTML, CSS, and vanilla JavaScript.</p>
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">JS</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="skills">
+    <section id="contact" class="contact fade-in">
+        <h2 class="section-title">Get In Touch</h2>
+        <p>Whether you want to collaborate on a coding project or talk about video creation, feel free to reach out!</p>
+        <div class="contact-links">
+            <a href="mailto:dheerajkumarpanda19@gmail.com" class="btn primary">Send an Email</a>
+            <a href="https://github.com/DKPTech" target="_blank" class="btn secondary">Visit GitHub</a>
+        </div>
+    </section>
 
-<div class="card">
-<h3>Python</h3>
-<p>Automation, small tools, and beginner projects.</p>
-</div>
+    <footer>
+        <p>&copy; 2026 Dheeraj Kumar Panda. Built with HTML, CSS, & JS.</p>
+    </footer>
 
-<div class="card">
-<h3>Web Development</h3>
-<p>HTML and CSS for building responsive websites.</p>
-</div>
-
-<div class="card">
-<h3>Git & GitHub</h3>
-<p>Version control and project hosting.</p>
-</div>
-
-<div class="card">
-<h3>Video Editing</h3>
-<p>CapCut editing for YouTube and shorts.</p>
-</div>
-
-</div>
-</section>
-
-<section id="projects">
-<h2>Projects</h2>
-
-<div class="project">
-
-<h3>Student Notes Website</h3>
-<p>A website to organize study notes for CBSE students.</p>
-<a href="https://github.com/DKPTech/Student-productivity-tracker.git">View Code</a>
-
-</div>
-
-</section>
-
-<section id="contact">
-<h2>Contact</h2>
-
-<p>Email: dheeraj@example.com</p>
-<p>GitHub: https://github.com/DKPTech</p>
-
-</section>
-
-<footer>
-<p>© 2026 Dheeraj Kumar Panda</p>
-</footer>
-
+    
 </body>
 </html>
+
